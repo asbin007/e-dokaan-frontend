@@ -5,17 +5,17 @@ const userInfo: User = {
   name: "asbin",
   age: "23",
 };
-createSlice({
+const userSlice=createSlice({
   name: "user",
   initialState: {
     user: userInfo,
   },
   reducers: {
-    setName(state: User, action: PayloadAction<User>) {
-      state.name = "lorem";
+    setName(state: User, action: PayloadAction<string>) {
+      state.name = action.payload;
     },
-    setAge(state: User, action: PayloadAction<User>) {
-      state.age = "25";
+    setAge(state: User, action: PayloadAction<string>) {
+      state.age = action.payload
     },
   },
 });
