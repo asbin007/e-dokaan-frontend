@@ -1,13 +1,11 @@
+import { Status } from "../globals/types";
 
-export interface User{
-    name:string;
-    age:number
-
-}
-interface ProductInfo{
-    productNm:string;
-    qty:number;
-}
-export interface Product {
-    products: [] | ProductInfo[];
-}
+export interface IUser {
+    username: string | null;
+    email: string | null;
+    password: string | null;
+  }
+  export interface IAuthState {
+    user: IUser;
+    status: Status;
+  }
