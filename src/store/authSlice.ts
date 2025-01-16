@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IAuthState, IUser } from "./types";
 import { Status } from "../globals/types";
-import axios from "axios";
+import APT from "../http/index";
 import { AppDispatch } from "./store";
 
 const initialState: IAuthState = {
@@ -31,8 +31,8 @@ export default authSlice.reducer;
 export function registerUser(data: IUser) {
   return async function registerUserThunk(dispatch: AppDispatch) {
     try {
-      const res = await axios.post(
-        "http://localhost:3000/api/auth/register",
+      const res = await APT.post(
+        "/auth/register",
         data
       );
       console.log(res);
@@ -46,12 +46,16 @@ export function registerUser(data: IUser) {
     }
   };
 }
-
-function loginUser(data: IUser) {
+  
+export function loginUser(data: IUser) {
   return async function loginUserThunk(dispatch: AppDispatch) {
     try {
-      const res = await axios.post(
-        "http://localhost:3000/api/auth/login",
+      // const res = await axios.post(
+      //   "http://localhost:3000/api/auth/login",
+      //   data
+      // );
+      const res = await APT.post(
+        "/auth/login",
         data
       );
       console.log(res);
@@ -69,8 +73,12 @@ function loginUser(data: IUser) {
 function forgotPassword(data: { email: string }) {
   return async function forgotPasswordThunk(dispatch: AppDispatch) {
     try {
-      const res = await axios.post(
-        "http://localhost:3000/api/auth/forgot-password",
+      // const res = await axios.post(
+      //   "http://localhost:3000/api/auth/forgot-password",
+      //   data
+      // );
+      const res = await APT.post(
+        "/auth/forgot-password",
         data
       );
       console.log(res);

@@ -1,8 +1,13 @@
-import { ChangeEvent, FormEvent, useState } from "react"
-import { useAppDispatch } from "../../store/hooks"
+import { ChangeEvent, FormEvent, useEffect, useState } from "react"
+import { useAppDispatch, useAppSelector } from "../../store/hooks"
 import { registerUser } from "../../store/authSlice"
+import { Status } from "../../globals/types"
+import { useNavigate } from "react-router-dom"
 const Register = () => {
-  const dispatch = useAppDispatch() 
+  const dispatch = useAppDispatch()
+  const { status } = useAppSelector((store) => store.auth)
+  // console.log(status, "current")
+  const navigate = useNavigate()
   const [data, setData] = useState({
     username: '',
     email: '',
@@ -27,7 +32,15 @@ const Register = () => {
 
 
   }
-
+useEffect(() => {
+    if (status === "success") {
+      navigate('/login');
+      setData({ username: '', email: '', password: '' }); // Reset form fields
+    } else if (status === Status.ERROR) {
+      // Display error message in the UI instead of alert
+      console.error("Something went wrong");
+    }
+  }, [status, navigate]);
 
 
 
