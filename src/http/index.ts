@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const APT=axios.create({
+const API=axios.create({
   baseURL: "http://localhost:3000/api",
   headers: {
     "Content-Type": "application/json",
     "Accept": "application/json",
   },
 });
-export default APT
+export default API

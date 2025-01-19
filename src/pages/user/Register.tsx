@@ -2,11 +2,11 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../../store/hooks"
 import { registerUser } from "../../store/authSlice"
 import { Status } from "../../globals/types"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 const Register = () => {
   const dispatch = useAppDispatch()
   const { status } = useAppSelector((store) => store.auth)
-  // console.log(status, "current")
+  console.log(status, "current")
   const navigate = useNavigate()
   const [data, setData] = useState({
     username: '',
@@ -33,7 +33,7 @@ const Register = () => {
 
   }
 useEffect(() => {
-    if (status === "success") {
+    if (status === Status.SUCCESS) {
       navigate('/login');
       setData({ username: '', email: '', password: '' }); // Reset form fields
     } else if (status === Status.ERROR) {
@@ -94,6 +94,7 @@ useEffect(() => {
                 Account
               </button>
             </div>
+            <p className="text-blue-500">Wanna login ?<Link to={'/login'}> Go to Login </Link></p>
           </form>
         </div>
       </div>
