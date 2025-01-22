@@ -58,6 +58,7 @@ export function loginUser(data: IUser) {
       if(response.status === 200){
           dispatch(setStatus(Status.SUCCESS))
           if(response.data.token){
+            console.log(response.data.token)
               localStorage.setItem("tokenHoYo",response.data.token)
               dispatch(setToken(response.data.token))
           }else{

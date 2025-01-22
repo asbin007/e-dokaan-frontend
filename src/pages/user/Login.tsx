@@ -1,11 +1,13 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { loginUser } from "../../store/authSlice";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 // import { FiLoader } from "react-icons/fi";
+
 
 const Login = () => {
   const dispatch = useAppDispatch();
+  // const navigate =useNavigate()
   const { status, user } = useAppSelector((store) => store.auth);
 
   console.log(status);
@@ -25,8 +27,10 @@ const Login = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
 
     dispatch(loginUser(data));
+    
   };
 
   return (
@@ -40,7 +44,7 @@ const Login = () => {
           />
 
           <h2 className="my-3 text-center text-3xl font-bold tracking-tight text-gray-900">
-            Sign In {user.username}
+            Sign In ,{user?.username}
           </h2>
 
           <form className="space-y-6" onSubmit={handleSubmit}>
@@ -88,7 +92,7 @@ const Login = () => {
                 type="submit"
                 className="flex w-full justify-center rounded-md border border-transparent bg-sky-400 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-opacity-75 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2"
               >
-                Login Account
+               {} Login Account
               </button>
             </div>
             <p className="text-blue-500">
