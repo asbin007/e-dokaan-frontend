@@ -6,14 +6,16 @@ import { useEffect, useState } from "react"
 function Navbar(){
     const reduxToken = useAppSelector((store)=>store.auth.user.token)
     const localStorageToken = localStorage.getItem("tokenHoYo")
-    const [isLoggedIn,setIsLoggedIn] = useState<boolean>(false)
+    const [isLoggedIn,setIsLoggedIn] = useState<boolean>(true)
 
     useEffect(()=>{
       console.log(localStorageToken,reduxToken)
-        setIsLoggedIn(!!localStorageToken || !!reduxToken)
-        // if(reduxToken && localStorageToken){
-        //     setIsLoggedIn(true)
-        // }
+
+        // setIsLoggedIn(!!localStorageToken || !!reduxToken)
+        if(reduxToken && localStorageToken){
+            setIsLoggedIn(false)
+        }
+        console.log(localStorageToken,reduxToken)
     },[])
     console.log(isLoggedIn)
 
@@ -32,6 +34,8 @@ function Navbar(){
         </div>
       </div>
       <div className="flex mt-4 sm:mt-0">
+      <Link className="px-4" to="/product">Products</Link>
+
         <a className="px-4" href="#features">Features</a>
         <a className="px-4" href="#services">Services</a>
         <a className="px-4" href="#stats">Stats</a>

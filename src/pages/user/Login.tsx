@@ -10,7 +10,7 @@ const Login = () => {
   // const navigate =useNavigate()
   const { status, user } = useAppSelector((store) => store.auth);
 
-  console.log(status);
+  // console.log(status);
 
   const [data, setData] = useState({
     email: "",
