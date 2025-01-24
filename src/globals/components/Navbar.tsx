@@ -5,7 +5,10 @@ import { useEffect, useState } from "react"
 
 function Navbar(){
     const reduxToken = useAppSelector((store)=>store.auth.user.token)
+    console.log("reduxToken:",reduxToken)
+
     const localStorageToken = localStorage.getItem("tokenHoYo")
+    console.log("local",localStorageToken)
     const [isLoggedIn,setIsLoggedIn] = useState<boolean>(true)
 
     useEffect(()=>{
