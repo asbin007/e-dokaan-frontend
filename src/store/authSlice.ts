@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IAuthState, IUser } from "./types";
 import { Status } from "../globals/types";
-import API from "../http/index";
+
 import { AppDispatch } from "./store";
+import  {API}  from "../http/index";
 
 const initialState: IAuthState = {
   user: {
@@ -47,6 +48,7 @@ export function registerUser(data: IUser) {
     } catch (error) {
       console.log(error);
       dispatch(setStatus(Status.ERROR));
+
     }
   };
 }
@@ -86,7 +88,7 @@ export function forgotPassword(data: { email: string }) {
         data
       );
       console.log(res);
-      if (res.status === 201) {
+      if (res.status === 201 ) {
         dispatch(setUser(res.data));
         dispatch(setStatus(Status.SUCCESS));
 
