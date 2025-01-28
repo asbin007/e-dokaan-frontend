@@ -1,12 +1,24 @@
-import { IProduct, Status } from './../../globals/types';
-  
+import {  Status } from "./../../globals/types";
 
-export interface ICartItem{
-    product:IProduct,
-    quantity:number
+export interface ICartProduct {
+  id: string;
+  productName: string;
+  productImgUrl: string;
+  productPrice: number;
 }
-export interface ICartInitialState{
-    items:ICartItem[],
-    status:Status
+export interface ICartItem {
+  id: string;
+  productId: string;
+  product: ICartProduct;
+  quantity: number;
+}
 
+export interface ICartInitialState {
+  items: ICartItem[];
+  status: Status;
+}
+
+export interface ICartUpdateItem {
+  productId: string;
+  quantity: number;
 }

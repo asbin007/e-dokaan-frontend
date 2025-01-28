@@ -10,6 +10,8 @@ function Product(){
     const {products,status} = useAppSelector((store)=>store.products)
     useEffect(()=>{
         dispatch(fetchProducts())
+        console.log(products)
+
     },[])
 
     return ( 

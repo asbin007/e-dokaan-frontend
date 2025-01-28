@@ -5,6 +5,7 @@ interface ICardProps{
   product:IProduct
 }
 const Card:React.FC<ICardProps> = ({product}) => {
+  
 
 
   return (
@@ -13,12 +14,13 @@ const Card:React.FC<ICardProps> = ({product}) => {
     <div className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
       <a href="#">
         <img
-          src={`http://localhost:3001/${product.productImageUrl}`}
+          src={`http://localhost:3001/${product.productImgUrl}`}
+          // src={product.productImageUrl}
           alt="Product"
           className="h-80 w-72 object-cover rounded-t-xl"
         />
         {/* {
-          console.log(product.productImageUrl)
+          console.log(product.productImageUrl,product.id)
         } */}
         <div className="px-4 py-3 w-72">
           <span className="text-gray-400 mr-3 uppercase text-xs">Brand</span>

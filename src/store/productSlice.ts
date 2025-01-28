@@ -34,6 +34,8 @@ export function fetchProducts() {
   return async function fetchProductsThunk(dispatch: AppDispatch) {
     try {
       const response = await API.get("/product");
+
+      
       if (response.status === 200) {
         dispatch(setStatus(Status.SUCCESS));
         dispatch(setProduct(response.data.data));

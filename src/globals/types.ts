@@ -15,7 +15,7 @@ productName: string;
   productPrice: number;
   productTotalStock: number;
   discount: number;
-  productImageUrl: string;
+  productImgUrl: string;
   createdAt: string;
   updatedAt: string;
   categoryId: string;

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ICartInitialState, ICartItem } from "../pages/cart/types";
+import { ICartInitialState, ICartItem,ICartUpdateItem } from "../pages/cart/types";
 import { Status } from "../globals/types";
 import { AppDispatch } from "./store";
 import  { APIWithToken } from "../http";
@@ -27,7 +27,7 @@ export default cartSlice.reducer;
 
 
 
-export function addToCart(productId:String) {
+export function addToCart(productId:string) {
   return async function addToCartThunk(dispatch: AppDispatch) {
     try {
       const response = await APIWithToken.post("/cart", {
@@ -46,4 +46,28 @@ export function addToCart(productId:String) {
       dispatch(setStatus(Status.ERROR));
     }
   };
+}
+
+
+export function fetchCartItems(){
+  return async function fetchCartItemsThunk(dispatch:useAppDispatch){
+  try {
+    
+    const response= await APIWithToken('/cart')
+    if(response.status===200){
+      dispatch(setItems(response.data.data))
+      dispatch(setStatus(Status.SUCCESS))
+    }
+    else{
+      dispatch(setStatus(Status.ERROR))
+
+    }
+  } catch (error) {
+    console.log(error)
+    dispatch(setStatus(Status.ERROR))
+
+    
+  }
+
+  }
 }
