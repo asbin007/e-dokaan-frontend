@@ -1,8 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ICartInitialState, ICartItem,ICartUpdateItem } from "../pages/cart/types";
+import {
+  ICartInitialState,
+  ICartItem,
+  ICartUpdateItem,
+} from "../pages/cart/types";
 import { Status } from "../globals/types";
 import { AppDispatch } from "./store";
-import  { APIWithToken } from "../http";
+import { APIWithToken } from "../http";
 
 const initialState: ICartInitialState = {
   items: [],
@@ -19,15 +23,30 @@ const cartSlice = createSlice({
     setStatus(state: ICartInitialState, action: PayloadAction<Status>) {
       state.status = action.payload;
     },
+    setUpdateCartItems(
+      state: ICartInitialState,
+      action: PayloadAction<ICartUpdateItem>
+    ) {
+      const index = state.items.findIndex(
+        (item) => item.product.id === action.payload.productId
+      );
+      if (index !== -1) {
+        state.items[index].quantity = action.payload.quantity;
+      }
+    },
+    setDeleteCartItem(state: ICartInitialState, action: PayloadAction<string>) {
+      const index = state.items.findIndex(item => item.product.id === action.payload);
+      if (index !== -1) {
+        state.items.splice(index, 1);
+      }
+    }
   },
 });
 
-export const { setItems, setStatus } = cartSlice.actions;
+export const { setItems, setStatus, setUpdateCartItems, setDeleteCartItem } = cartSlice.actions;
 export default cartSlice.reducer;
 
-
-
-export function addToCart(productId:string) {
+export function addToCart(productId: string) {
   return async function addToCartThunk(dispatch: AppDispatch) {
     try {
       const response = await APIWithToken.post("/cart", {
@@ -42,32 +61,61 @@ export function addToCart(productId:string) {
         dispatch(setStatus(Status.ERROR));
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       dispatch(setStatus(Status.ERROR));
     }
   };
 }
 
-
-export function fetchCartItems(){
-  return async function fetchCartItemsThunk(dispatch:useAppDispatch){
-  try {
-    
-    const response= await APIWithToken('/cart')
-    if(response.status===200){
-      dispatch(setItems(response.data.data))
-      dispatch(setStatus(Status.SUCCESS))
+export function fetchCartItems() {
+  return async function fetchCartItemsThunk(dispatch: AppDispatch) {
+    try {
+      const response = await APIWithToken.get("/cart");
+      if (response.status === 200) {
+        dispatch(setItems(response.data.data));
+        dispatch(setStatus(Status.SUCCESS));
+      } else {
+        dispatch(setStatus(Status.ERROR));
+      }
+    } catch (error) {
+      console.error(error);
+      dispatch(setStatus(Status.ERROR));
     }
-    else{
-      dispatch(setStatus(Status.ERROR))
+  };
+}
 
+export function handleCartItems(productId: string, quantity: number) {
+  return async function handleCartItemsThunk(dispatch: AppDispatch) {
+    try {
+      const response = await APIWithToken.patch(`/cart/${productId}`, {
+        quantity,
+      });
+      if (response.status === 200) {
+        dispatch(setUpdateCartItems({ productId, quantity }));
+        dispatch(setStatus(Status.SUCCESS));
+      } else {
+        dispatch(setStatus(Status.ERROR));
+      }
+    } catch (error) {
+      console.error(error);
+      dispatch(setStatus(Status.ERROR));
     }
-  } catch (error) {
-    console.log(error)
-    dispatch(setStatus(Status.ERROR))
+  };
+}
 
-    
-  }
-
-  }
+export function handleCartItemDelete(productId: string) {
+  return async function handleCartItemDeleteThunk(dispatch: AppDispatch) {
+    try {
+      const response = await APIWithToken.delete(`/cart/${productId}`);
+      if (response.status === 200) {
+        dispatch(setDeleteCartItem(productId));
+        dispatch(setStatus(Status.SUCCESS));
+      } else {
+        dispatch(setStatus(Status.ERROR));
+      }
+    } catch (error) {
+      console.error(error);
+      dispatch(setStatus(Status.ERROR));
+    }
+  };
 }

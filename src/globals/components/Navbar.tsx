@@ -11,21 +11,24 @@ function Navbar() {
   const localStorageToken = localStorage.getItem("tokenHoYo");
   console.log("local", localStorageToken);
 
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const { items } = useAppSelector((store) => store.cart);
   const dispatch = useAppDispatch();
-  useEffect(() => {
+  useEffect(() => { 
     console.log(localStorageToken, reduxToken);
 
     setIsLoggedIn(!!localStorageToken || !!reduxToken);
 
     dispatch(fetchCartItems());
     // if(reduxToken && localStorageToken){
-    //     setIsLoggedIn(false)
+        // setIsLoggedIn(false)
 
     // }
-    console.log(localStorageToken, reduxToken);
+
+    
   }, []);
+  console.log(localStorageToken, reduxToken);
+
   console.log(isLoggedIn);
 
   return (

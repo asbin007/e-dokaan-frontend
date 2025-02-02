@@ -52,10 +52,10 @@ export function fetchProducts() {
 export function fetchProduct(id: string) {
   return async function fetchProductThunk(dispatch: AppDispatch,getState:()=>RootState) {
     const store=getState()
-    const productExits=store.products.products.find((product:IProduct)=>product.id===id)
+    const productExists = store.products.products.find((product:IProduct)=>product.id === id) 
    
-   if(productExits){
-    dispatch(setProduct(productExits))
+   if(productExists){
+    dispatch(setProduct(productExists))
     dispatch(setStatus(Status.SUCCESS))
 
    }

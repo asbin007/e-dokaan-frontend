@@ -5,6 +5,12 @@ import { Status } from "../globals/types";
 import { AppDispatch } from "./store";
 import  {API}  from "../http/index";
 
+
+interface ILoginUser{
+  email : string, 
+  password : string
+}
+
 const initialState: IAuthState = {
   user: {
     username: null,
@@ -42,7 +48,7 @@ export function registerUser(data: IUser) {
       );
       console.log(res);
       if (res.status === 201) {
-        dispatch(setUser(res.data));
+        dispatch(setUser(data));
         dispatch(setStatus(Status.SUCCESS));
       } else dispatch(setStatus(Status.ERROR));
     } catch (error) {
@@ -53,15 +59,15 @@ export function registerUser(data: IUser) {
   };
 }
   
-export function loginUser(data: IUser) {
+export function loginUser(data: ILoginUser) {
   return async function loginUserThunk(dispatch: AppDispatch) {
     try {
       const response = await API.post("/auth/login",data)
-      if(response.status === 200){
+      if(response.status === 201){
           dispatch(setStatus(Status.SUCCESS))
           if(response.data.token){
-            console.log("token",response.data.token)
               localStorage.setItem("tokenHoYo",response.data.token)
+
               dispatch(setToken(response.data.token))
           }else{
               dispatch(setStatus(Status.ERROR))

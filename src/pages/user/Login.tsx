@@ -17,7 +17,7 @@ const Login = () => {
     password: "",
   });
 
-  const handleChange = (e: ChangeEvent<HTMLElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setData({
       ...data,
