@@ -63,8 +63,9 @@ export function loginUser(data: ILoginUser) {
   return async function loginUserThunk(dispatch: AppDispatch) {
     try {
       const response = await API.post("/auth/login",data)
-      if(response.status === 201){
+      if(response.status === 200){
           dispatch(setStatus(Status.SUCCESS))
+          console.log("res",response.data)
           if(response.data.token){
               localStorage.setItem("tokenHoYo",response.data.token)
 

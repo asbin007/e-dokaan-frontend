@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchProduct } from "../../store/productSlice";
-import { Link, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import Navbar from "../../globals/components/Navbar";
 import { addToCart } from "../../store/cartlSlice";
 
@@ -9,17 +9,19 @@ const SingleProduct = () => {
   const { id } = useParams();
   const { product } = useAppSelector((store) => store.products);
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    id && dispatch(fetchProduct(id));
-  }, []);
-
-  const handleAddToCart = () => {
-    if (id) {
-      dispatch(addToCart(id));
-    }
-    
-  };
+  // const navigate=useNavigate()
+  useEffect(()=>{
+    if(id)
+     dispatch(fetchProduct(id))
+    console.log("Product",product)
+},[id,dispatch])
+const handleAddToCart = () => {
+  if (id) {
+    dispatch(addToCart(id));
+    // navigate('/my-cart')
+  }
+  
+};
   return (
     <>
       <Navbar />

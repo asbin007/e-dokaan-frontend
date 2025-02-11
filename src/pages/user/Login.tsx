@@ -1,13 +1,13 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { loginUser } from "../../store/authSlice";
-import { Link} from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 // import { FiLoader } from "react-icons/fi";
 
 
 const Login = () => {
   const dispatch = useAppDispatch();
-  // const navigate =useNavigate()
+  const navigate =useNavigate()
   const { status, user } = useAppSelector((store) => store.auth);
 
   // console.log(status);
@@ -30,6 +30,8 @@ const Login = () => {
     
 
     dispatch(loginUser(data));
+    navigate('/')
+
     
   };
 

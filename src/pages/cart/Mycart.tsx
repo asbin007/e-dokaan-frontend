@@ -1,8 +1,7 @@
 import { setDeleteCartItem, setUpdateCartItems } from "../../store/cartlSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import store from "../../store/store";
 
-const Mycart = () => {
+const MyCart = () => {
   const { items } = useAppSelector((store) => store.cart);
   const dispatch = useAppDispatch();
   const handleUpdate = (productId: string, quantity: number) => {
@@ -86,7 +85,7 @@ const Mycart = () => {
                               <div className="flex items-center">
                                 <button
                                   className="border rounded-md py-2 px-4 ml-2 bg-red-600 hover:bg-red-800"
-                                  onClick={() => handleDelete(item.Product.id)}
+                                  onClick={() => handleDelete(item.productId)}
                                 >
                                   X
                                 </button>
@@ -133,4 +132,4 @@ const Mycart = () => {
   );
 };
 
-export default Mycart;
+export default MyCart;

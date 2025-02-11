@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useEffect, useState } from "react";
 import { fetchCartItems } from "../../store/cartlSlice";
 
-
 function Navbar() {
   const reduxToken = useAppSelector((store) => store.auth.user.token);
   console.log("reduxToken:", reduxToken);
@@ -14,19 +13,22 @@ function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const { items } = useAppSelector((store) => store.cart);
   const dispatch = useAppDispatch();
-  useEffect(() => { 
+  useEffect(() => {
     console.log(localStorageToken, reduxToken);
 
     setIsLoggedIn(!!localStorageToken || !!reduxToken);
+    if (isLoggedIn) {
+      dispatch(fetchCartItems()); 
+      
+      
 
-    dispatch(fetchCartItems());
+    }
     // if(reduxToken && localStorageToken){
-        // setIsLoggedIn(false)
+    // setIsLoggedIn(false)
 
     // }
+  }, [isLoggedIn]);
 
-    
-  }, []);
   console.log(localStorageToken, reduxToken);
 
   console.log(isLoggedIn);
