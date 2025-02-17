@@ -11,6 +11,8 @@ const MyCart = () => {
     dispatch(setDeleteCartItem(productId));
   };
 
+  
+
   return (
     <>
       <div className="bg-gray-100 h-screen py-8">

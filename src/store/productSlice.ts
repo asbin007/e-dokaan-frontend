@@ -55,7 +55,7 @@ export function fetchProduct(id: string) {
     const productExists = store.products.products.find((product:IProduct)=>product.id === id) 
    
    if(productExists){
-    dispatch(setProduct(productExists))
+    dispatch(setSingleProduct(productExists))
     dispatch(setStatus(Status.SUCCESS))
 
    }

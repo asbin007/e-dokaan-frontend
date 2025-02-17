@@ -14,7 +14,7 @@ const SingleProduct = () => {
     if(id)
      dispatch(fetchProduct(id))
     console.log("Product",product)
-},[id,dispatch])
+},[])
 const handleAddToCart = () => {
   if (id) {
     dispatch(addToCart(id));

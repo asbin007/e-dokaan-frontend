@@ -4,13 +4,13 @@ export enum Status {
   LOADING = "loading",
 }
 
-interface ICategory{
-    id:string,
-    categoryName: string
+interface ICategory {
+  id: string;
+  categoryName: string;
 }
 export interface IProduct {
   id: string;
-productName: string;
+  productName: string;
   productDescription: string;
   productPrice: number;
   productTotalStock: number;
@@ -22,9 +22,8 @@ productName: string;
   Category: ICategory;
 }
 
-
-export interface IProducts{
-    products:IProduct[],
-    status:Status,
-    product:IProduct | null
+export interface IProducts {
+  products: IProduct[];
+  status: Status;
+  product: IProduct | null;
 }

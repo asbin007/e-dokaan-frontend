@@ -18,16 +18,14 @@ function Navbar() {
 
     setIsLoggedIn(!!localStorageToken || !!reduxToken);
     if (isLoggedIn) {
-      dispatch(fetchCartItems()); 
-      
-      
-
+      dispatch(fetchCartItems());
     }
     // if(reduxToken && localStorageToken){
     // setIsLoggedIn(false)
 
     // }
-  }, [isLoggedIn]);
+  }, []);
+
 
   console.log(localStorageToken, reduxToken);
 
@@ -77,10 +75,9 @@ function Navbar() {
           {isLoggedIn ? (
             <>
               <span className="mr-[10px]">
-                {" "}
-                <Link to="/my-cart">
-                  Cart <sup>{items.length > 0 ? items.length : 0}</sup>{" "}
-                </Link>{" "}
+                <Link to="/my-cart"  >
+                  Cart <sup>{items.length > 0 ? items.length : 0}</sup>
+                </Link>
               </span>
               <Link to="/logout">
                 <button
