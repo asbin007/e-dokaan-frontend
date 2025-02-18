@@ -5,11 +5,17 @@ export interface ICartProduct {
   productName: string;
   productImgUrl: string;
   productPrice: number;
+  productDescription: string;
+  productTotalStock: number;
+  discount: number;
+  categoryId: string;
+  
+
 }
 export interface ICartItem {
   id: string;
   productId: string;
-  product: ICartProduct;
+  Product: ICartProduct;
   quantity: number;
 }
 

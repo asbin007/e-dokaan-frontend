@@ -28,14 +28,14 @@ const cartSlice = createSlice({
       action: PayloadAction<ICartUpdateItem>
     ) {
       const index = state.items.findIndex(
-        (item) => item.product.id === action.payload.productId
+        (item) => item.Product.id === action.payload.productId
       );
       if (index !== -1) {
         state.items[index].quantity = action.payload.quantity;
       }
     },
     setDeleteCartItem(state: ICartInitialState, action: PayloadAction<string>) {
-      const index = state.items.findIndex(item => item.product.id === action.payload);
+      const index = state.items.findIndex(item => item.Product.id === action.payload);
       if (index !== -1) {
         state.items.splice(index, 1);
       }
@@ -84,8 +84,8 @@ export function fetchCartItems() {
   };
 }
 
-export function handleCartItems(productId: string, quantity: number) {
-  return async function handleCartItemsThunk(dispatch: AppDispatch) {
+export function handleCartItemsUpdate(productId: string, quantity: number) {
+  return async function handleCartItemsUpdateThunk(dispatch: AppDispatch) {
     try {
       const response = await APIWithToken.patch(`/cart/${productId}`, {
         quantity,

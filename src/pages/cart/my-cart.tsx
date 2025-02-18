@@ -1,20 +1,30 @@
+import Navbar from "../../globals/components/Navbar";
 import { setDeleteCartItem, setUpdateCartItems } from "../../store/cartlSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
-const MyCart = () => {
+function MyCart() {
   const { items } = useAppSelector((store) => store.cart);
   const dispatch = useAppDispatch();
   const handleUpdate = (productId: string, quantity: number) => {
-    dispatch(setUpdateCartItems(productId, quantity));
+    dispatch(setUpdateCartItems({ productId, quantity }));
   };
   const handleDelete = (productId: string) => {
     dispatch(setDeleteCartItem(productId));
   };
-
-  
+  const subTotal = items.reduce(
+    (total, item) => item.Product.productPrice * item.quantity + total,
+    0
+  );
+  const totalQtyInCarts = items.reduce(
+    (total, item) => item.quantity + total,
+    0
+  );
+  const shippingPrice = 100;
+  const total = subTotal + shippingPrice;
 
   return (
     <>
+      <Navbar />
       <div className="bg-gray-100 h-screen py-8">
         <div className="container mx-auto px-4">
           <h1 className="text-2xl font-semibold mb-4">Shopping Cart</h1>
@@ -39,17 +49,16 @@ const MyCart = () => {
                               <div className="flex items-center">
                                 <img
                                   className="h-16 w-16 mr-4"
-                                  src={`http://localhost:3001/${item.product?.productImgUrl}`}
+                                  src={`http://localhost:3001/${item.Product?.productImgUrl}`}
                                   alt="Product image"
                                 />
                                 <span className="font-semibold">
-                                  {item.product?.productName}
+                                  {item.Product.productName}
                                 </span>
                               </div>
                             </td>
                             <td className="py-4">
-                              $ {item.product?.productName}
-                              {item.product?.productPrice}
+                              Rs. {item.Product.productPrice}
                             </td>
                             <td className="py-4">
                               <div className="flex items-center">
@@ -57,7 +66,7 @@ const MyCart = () => {
                                   className="border rounded-md py-2 px-4 mr-2"
                                   onClick={() =>
                                     handleUpdate(
-                                      item.product.id,
+                                      item.Product.id,
                                       item.quantity - 1
                                     )
                                   }
@@ -71,7 +80,7 @@ const MyCart = () => {
                                   className="border rounded-md py-2 px-4 ml-2"
                                   onClick={() =>
                                     handleUpdate(
-                                      item.product.id,
+                                      item.Product.id,
                                       item.quantity + 1
                                     )
                                   }
@@ -81,13 +90,13 @@ const MyCart = () => {
                               </div>
                             </td>
                             <td className="py-4">
-                              ${item.product.productPrice * item?.quantity}
+                              {item.Product.productPrice * item?.quantity}
                             </td>
                             <td className="py-4">
                               <div className="flex items-center">
                                 <button
                                   className="border rounded-md py-2 px-4 ml-2 bg-red-600 hover:bg-red-800"
-                                  onClick={() => handleDelete(item.productId)}
+                                  onClick={() => handleDelete(item.Product.id)}
                                 >
                                   X
                                 </button>
@@ -96,8 +105,6 @@ const MyCart = () => {
                           </tr>
                         );
                       })}
-
-                    {/* More product rows */}
                   </tbody>
                 </table>
               </div>
@@ -107,20 +114,20 @@ const MyCart = () => {
                 <h2 className="text-lg font-semibold mb-4">Summary</h2>
                 <div className="flex justify-between mb-2">
                   <span>Subtotal</span>
-                  <span>$19.99</span>
+                  <span>Rs {subTotal}</span>
                 </div>
                 <div className="flex justify-between mb-2">
-                  <span>Taxes</span>
-                  <span>$1.99</span>
+                  <span>Total Qty</span>
+                  <span>{totalQtyInCarts}</span>
                 </div>
                 <div className="flex justify-between mb-2">
                   <span>Shipping</span>
-                  <span>$0.00</span>
+                  <span>Rs {shippingPrice}</span>
                 </div>
                 <hr className="my-2" />
                 <div className="flex justify-between mb-2">
                   <span className="font-semibold">Total</span>
-                  <span className="font-semibold">$21.98</span>
+                  <span className="font-semibold">Rs. {total}</span>
                 </div>
                 <button className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full">
                   Checkout
@@ -132,6 +139,6 @@ const MyCart = () => {
       </div>
     </>
   );
-};
+}
 
 export default MyCart;

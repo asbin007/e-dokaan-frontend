@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useEffect, useState } from "react";
 import { fetchCartItems } from "../../store/cartlSlice";
@@ -13,6 +13,7 @@ function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const { items } = useAppSelector((store) => store.cart);
   const dispatch = useAppDispatch();
+  const navigate= useNavigate()
   useEffect(() => {
     console.log(localStorageToken, reduxToken);
 
@@ -75,9 +76,9 @@ function Navbar() {
           {isLoggedIn ? (
             <>
               <span className="mr-[10px]">
-                <Link to="/my-cart"  >
+                 <button onClick={()=>navigate('/my-cart')}>
                   Cart <sup>{items.length > 0 ? items.length : 0}</sup>
-                </Link>
+                  </button>
               </span>
               <Link to="/logout">
                 <button
