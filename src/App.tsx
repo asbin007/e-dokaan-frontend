@@ -8,6 +8,7 @@ import Login from "./pages/user/Login";
 import Product from "./pages/products/Product";
 import SingleProduct from "./pages/singleProduct/SingleProduct";
 import MyCart from "./pages/cart/my-cart";
+import Checkout from "./pages/checkout/Checkout";
 function App() {
   return (
     <Provider store={store}>
@@ -19,7 +20,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/product" element={<Product />} />
           <Route path="/product/:id" element={<SingleProduct />} />
-          <Route path='/my-cart' element={<MyCart/>}/>
+          <Route path="/my-cart" element={<MyCart />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
       </BrowserRouter>
     </Provider>
