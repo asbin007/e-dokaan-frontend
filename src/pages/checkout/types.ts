@@ -5,23 +5,23 @@ interface IProduct{
     productQty: number;
 }
 export interface IOrderItems extends IProduct{
-    orderId: string;
+    orderId : string
 }
 export enum PaymentMethod{
     Esewa = "esewa", 
     Khalti = "khalti", 
-    Cod = "cod"
+    COD = "cod"
 }
 export interface IData{
     firstName : string, 
     lastName : string, 
     phoneNumber : string, 
     email : string, 
-    city : string, 
+    City : string, 
     zipCode : string, 
     state : string, 
-    addressLine : string, 
+    AddressLine : string, 
     totalAmount : number, 
-    paymentMethod:PaymentMethod[],
+    paymentMethod:PaymentMethod,
     products:IProduct[]
 }

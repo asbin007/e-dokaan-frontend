@@ -25,7 +25,7 @@ function Navbar() {
     // setIsLoggedIn(false)
 
     // }
-  }, []);
+  }, [isLoggedIn]);
 
 
   console.log(localStorageToken, reduxToken);
@@ -77,7 +77,7 @@ function Navbar() {
             <>
               <span className="mr-[10px]">
                  <button onClick={()=>navigate('/my-cart')}>
-                  Cart <sup>{items.length > 0 ? items.length : 0}</sup>
+                  Cart <sup>{items?.length > 0 ? items?.length : 0}</sup>
                   </button>
               </span>
               <Link to="/logout">
