@@ -7,7 +7,7 @@ import { orderItem } from "../../store/checkoutSlice";
 function Checkout() {
   const dispatch = useAppDispatch();
   const { items } = useAppSelector((store) => store.cart);
-  const{khaltiUrl,status}=useAppSelector((store)=>store.orders)
+  const { khaltiUrl, status } = useAppSelector((store) => store.orders);
   console.log(items);
 
   const totals = items?.reduce(
@@ -63,15 +63,14 @@ function Checkout() {
       totalAmount: totals,
     };
     console.log(finalData);
-     await dispatch(orderItem(finalData));
+    await dispatch(orderItem(finalData));
   };
-  useEffect(()=>{
-    if(khaltiUrl){
-      window.location.href=khaltiUrl;
-      return
+  useEffect(() => {
+    if (khaltiUrl) {
+      window.location.href = khaltiUrl;
+      return;
     }
-
-  },[khaltiUrl,status])
+  }, [khaltiUrl, status]);
 
   return (
     <>

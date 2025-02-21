@@ -38,7 +38,7 @@ export interface IOrderDetail {
         }
     },
     Product: {
-        productImageUrl: string,
+        productImgUrl: string,
         productName: string,
         productPrice: number,
         Category: {
