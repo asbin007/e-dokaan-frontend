@@ -120,7 +120,7 @@ export function fetchMyorderDetails(id: string) {
 export function cancelOrder(id: string) {
   return async function cancelOrderThunk(dispatch: AppDispatch) {
     try {
-      const response = await APIWithToken.patch("/order/cancel-order" + id);
+      const response = await APIWithToken.patch("/order/cancel-order/" + id);
       if (response.status === 200) {
         dispatch(setStatus(Status.SUCCESS));
         dispatch(setUpdateToCancel({ orderId: id }));

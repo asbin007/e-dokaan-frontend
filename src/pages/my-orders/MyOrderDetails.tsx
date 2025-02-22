@@ -3,7 +3,7 @@ import Navbar from "../../globals/components/Navbar";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useEffect } from "react";
 import { OrderStatus } from "./types";
-import { fetchMyorderDetails } from "../../store/checkoutSlice";
+import { fetchMyorderDetails,cancelOrder } from "../../store/checkoutSlice";
 
 
 
@@ -21,7 +21,7 @@ function MyOrderDetail(){
         }
     },[])
 
-    const cancelOrder = ()=>{
+    const cancelOrders = ()=>{
       if(id){
         dispatch(cancelOrder(id) )
       }
@@ -31,9 +31,11 @@ function MyOrderDetail(){
         <Navbar />
 <div className="py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto">
   <div className="flex justify-start item-start space-y-2 flex-col">
-    <h1 className="text-3xl dark:text-white lg:text-4xl font-semibold leading-7 lg:leading-9 text-gray-800">Order #{orderDetails[0]?.orderId}</h1>
-    <p className="text-base dark:text-gray-300 font-medium leading-6 text-gray-600">{ new Date(orderDetails[0]?.createdAt).toLocaleDateString()}</p> 
+  <h1 className="text-3xl lg:text-4xl font-semibold leading-7 lg:leading-9 text-gray-800">Order #{orderDetails[0]?.orderId}</h1>
+
+    <p className="text-base dark:text-gray-800 font-medium leading-6 text-gray-600">{ new Date(orderDetails[0]?.createdAt).toLocaleDateString()}</p> 
     <p>Order Status : {orderDetails[0]?.Order?.orderStatus}</p>
+
   </div> 
   <div className="mt-10 flex flex-col xl:flex-row jusitfy-center items-stretch w-full xl:space-x-8 space-y-4 md:space-y-6 xl:space-y-0">
     <div className="flex flex-col justify-start items-start w-full space-y-4 md:space-y-6 xl:space-y-8">
@@ -119,7 +121,7 @@ function MyOrderDetail(){
           <div className="flex w-full justify-center items-center md:justify-start md:items-start">
            {
             orderDetails[0]?.Order?.orderStatus !== OrderStatus?.Cancelled && (
-              <button onClick={cancelOrder} className="mt-6 md:mt-0 dark:border-white dark:hover:bg-gray-900 dark:bg-transparent dark:text-white py-5 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 border border-gray-800 font-medium w-96 2xl:w-full text-base font-medium leading-4 text-gray-800">Cancel Order</button>
+              <button onClick={cancelOrders} className="mt-6 md:mt-0 dark:border-white dark:hover:bg-gray-900 dark:bg-transparent dark:text-white py-5 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 border border-gray-800 font-medium w-96 2xl:w-full text-base font-medium leading-4 text-gray-800">Cancel Order</button>
             )
            }
           </div>

@@ -58,8 +58,8 @@ function Navbar() {
             Products
           </Link>
 
-          <a className="px-4" href="#features">
-            Features
+          <a className="px-4" href="/my-orders">
+            My Order
           </a>
           <a className="px-4" href="#services">
             Services
