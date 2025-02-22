@@ -13,6 +13,7 @@ import MyOrder from "./pages/my-orders/MyOrder";
 import MyOrderDetails from "./pages/my-orders/MyOrderDetails";
 import AdminDashboard from "./pages/admin/AdminLayout";
 import Categories from "./pages/admin/categories/components/Categories";
+import AdminStats from "./pages/admin/stats/AdminStats";
 
 function App() {
   return (
@@ -29,7 +30,7 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/my-orders" element={<MyOrder />} />
           <Route path="/my-orders/:id" element={<MyOrderDetails />} />
-          <Route path='/admin' element={<AdminDashboard/>}/>
+          <Route path='/admin' element={<AdminStats/>}/>
           <Route path='/admin/categories' element={<Categories />} />
 
 

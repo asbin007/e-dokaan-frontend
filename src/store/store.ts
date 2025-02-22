@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import authSlice from "./authSlice";
 import productSlice from "./productSlice";
 import cartSlice from "./cartlSlice"; // Fixed typo
-
+import adminCategorySlice from "./adminCategorySlice";
 import orderSlice from "./checkoutSlice" // Added new slice for orders
 const store = configureStore({
   reducer: {
@@ -10,6 +10,7 @@ const store = configureStore({
     products: productSlice,
     cart: cartSlice,
     orders: orderSlice,
+    category: adminCategorySlice
   },
 });
 
