@@ -43,11 +43,14 @@ const categorySlice = createSlice({
         state.items.splice(index, 1);
       }
     },
+    resetStatus(state:ICategoryInitialState){
+      state.status = Status.LOADING;
+    }
   },
 });
 
 // Export actions from this slice so they can be used in other parts of your app.
-export const { setItems, setStatus, deleteCategoryItem } =
+export const { setItems, setStatus, deleteCategoryItem,resetStatus } =
   categorySlice.actions;
 
 export default categorySlice.reducer;

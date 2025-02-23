@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
 
-function Sidebar(){
+function  Sidebar(){
     return ( 
         <div className="flex flex-col flex-1 overflow-y-auto">
         <nav className="flex-1 px-2 py-4 bg-gray-800">

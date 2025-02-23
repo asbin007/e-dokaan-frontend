@@ -1,6 +1,10 @@
-import { useState } from "react";
-import { setDeleteCategoryItem, updateCategoryItem } from "../../../../store/adminCategorySlice";
+import { useCallback, useState } from "react";
+import {
+  setDeleteCategoryItem,
+  updateCategoryItem,
+} from "../../../../store/adminCategorySlice";
 import { useAppDispatch } from "../../../../store/hooks";
+import Modal from "./Modal";
 
 interface ICategory {
   id: string;
@@ -8,11 +12,8 @@ interface ICategory {
 }
 function CategoryTable({ category }: { category: ICategory[] }) {
   const [searchItem, setSearchItem] = useState<string>("");
+  const [isModelOpen, setIsModelOpen] = useState(false);
   const dispatch = useAppDispatch();
-
-  const updateCategory = (id: string,categoryName:string) => {
-    dispatch(updateCategoryItem(id, categoryName));
-  };
 
   const deleteCategory = async (id: string) => {
     id && dispatch(setDeleteCategoryItem(id));
@@ -23,10 +24,13 @@ function CategoryTable({ category }: { category: ICategory[] }) {
       items.categoryName.toLowerCase().includes(searchItem.toLowerCase()) ||
       items.id.toLowerCase().includes(searchItem)
   );
+  const openModal = useCallback(() => setIsModelOpen(true), []);
+  const closeModal = useCallback(() => setIsModelOpen(false), []);
 
   return (
     <div className="flex flex-col">
       <div className=" overflow-x-auto">
+        {isModelOpen && <Modal closeModal={closeModal} />}
         <div className="min-w-full inline-block align-middle">
           <div className="relative  text-gray-500 focus-within:text-gray-900 mb-4">
             <div className="absolute inset-y-0 left-1 flex items-center pl-3 pointer-events-none ">
@@ -58,14 +62,24 @@ function CategoryTable({ category }: { category: ICategory[] }) {
                 />
               </svg>
             </div>
-            <input
-              onChange={(e) => setSearchItem(e.target.value)}
-              type="text"
-              id="default-search"
-              className="block w-80 h-11 pr-5 pl-12 py-2.5 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none"
-              placeholder="Search for company"
-            />
+            <div className="flex justify-between">
+              <input
+                onChange={(e) => setSearchItem(e.target.value)}
+                type="text"
+                id="default-search"
+                className="block w-80 h-11 pr-5 pl-12 py-2.5 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none"
+                placeholder="Search"
+              />
+
+              <button
+                className="bg-blue-500 rounded text-white  p-2"
+                onClick={openModal}
+              >
+                + Category
+              </button>
+            </div>
           </div>
+
           <div className="overflow-hidden ">
             <table className=" min-w-full rounded-xl">
               <thead>
@@ -112,7 +126,7 @@ function CategoryTable({ category }: { category: ICategory[] }) {
                         <td className=" p-5 ">
                           <div className="flex items-center gap-1">
                             <button
-                              onClick={() => updateCategory(items?.id)}
+                              onClick={openModal}
                               className="p-2  rounded-full  group transition-all duration-500  flex item-center"
                             >
                               <svg
@@ -134,7 +148,6 @@ function CategoryTable({ category }: { category: ICategory[] }) {
                               onClick={() => deleteCategory(items?.id)}
                               className="p-2 rounded-full  group transition-all duration-500  flex item-center"
                             >
-                                
                               <svg
                                 width={20}
                                 height={20}
