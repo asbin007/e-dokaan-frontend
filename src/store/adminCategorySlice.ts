@@ -32,9 +32,16 @@ const categorySlice = createSlice({
     },
 
     // Action to update the status of fetching categories (e.g., LOADING, SUCCESS, ERROR)
-    setStatus(state, action: PayloadAction<Status>) {
+    setStatus(state:ICategoryInitialState, action: PayloadAction<Status>) {
       state.status = action.payload as Status;
     },
+    // add category to admin categories list
+    addCategoryToItem(state:ICategoryInitialState,action:PayloadAction<ICategory>){
+      state.items.push(action.payload)
+
+    },
+
+
 
     // Action to delete a category item by its ID
     deleteCategoryItem(state, action: PayloadAction<string>) {
@@ -50,7 +57,7 @@ const categorySlice = createSlice({
 });
 
 // Export actions from this slice so they can be used in other parts of your app.
-export const { setItems, setStatus, deleteCategoryItem,resetStatus } =
+export const { setItems, setStatus, deleteCategoryItem,resetStatus,addCategoryToItem } =
   categorySlice.actions;
 
 export default categorySlice.reducer;
@@ -61,7 +68,7 @@ export function addCategoryItem(categoryName: string) {
       const response = await APIWithToken.post("/category", { categoryName });
       if (response.status == 200) {
         dispatch(setStatus(Status.SUCCESS));
-        dispatch(setItems(response.data.data));
+        dispatch(addCategoryToItem(response.data.data));
       } else {
         dispatch(setStatus(Status.ERROR));
       }

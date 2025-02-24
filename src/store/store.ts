@@ -3,14 +3,16 @@ import authSlice from "./authSlice";
 import productSlice from "./productSlice";
 import cartSlice from "./cartlSlice"; // Fixed typo
 import adminCategorySlice from "./adminCategorySlice";
-import orderSlice from "./checkoutSlice" // Added new slice for orders
+import orderSlice from "./checkoutSlice"; // Added new slice for orders
+import adminUserSlice from "./adminUserSlice";
 const store = configureStore({
   reducer: {
     auth: authSlice,
     products: productSlice,
     cart: cartSlice,
     orders: orderSlice,
-    category: adminCategorySlice
+    category: adminCategorySlice,
+    users: adminUserSlice,
   },
 });
 
