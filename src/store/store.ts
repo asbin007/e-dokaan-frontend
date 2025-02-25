@@ -5,6 +5,7 @@ import cartSlice from "./cartlSlice"; // Fixed typo
 import adminCategorySlice from "./adminCategorySlice";
 import orderSlice from "./checkoutSlice"; // Added new slice for orders
 import adminUserSlice from "./adminUserSlice";
+import adminProductSlice from "./adminProductSlice";
 const store = configureStore({
   reducer: {
     auth: authSlice,
@@ -13,6 +14,7 @@ const store = configureStore({
     orders: orderSlice,
     category: adminCategorySlice,
     users: adminUserSlice,
+    adminProducts: adminProductSlice,
   },
 });
 
