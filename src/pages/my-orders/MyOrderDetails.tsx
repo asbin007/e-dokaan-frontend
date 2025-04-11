@@ -1,16 +1,18 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../../globals/components/Navbar";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useEffect } from "react";
 import { OrderStatus } from "./types";
 import { fetchMyorderDetails,cancelOrder } from "../../store/checkoutSlice";
+import { Status } from "../../globals/types";
 
 
 
 function MyOrderDetail(){
+  const navigate=useNavigate()
     const dispatch = useAppDispatch()
     const {id} = useParams()
-    const {orderDetails}  = useAppSelector((store)=>store.orders)
+    const {orderDetails,status}  = useAppSelector((store)=>store.orders)
     // const [data] = items.filter((order)=>order.id === id)
     console.log(orderDetails,"ITEMS")
 
@@ -19,7 +21,18 @@ function MyOrderDetail(){
 
             dispatch(fetchMyorderDetails(id))
         }
+       
+        
     },[])
+    
+// 2. Handle cancel success only
+// useEffect(() => {
+//   if (status === Status.SUCCESS) {
+//     alert("Order is cancelled successfully");
+//     navigate("/my-orders");
+//   }
+// }, [status, navigate]);
+
 
     const cancelOrders = ()=>{
       if(id){

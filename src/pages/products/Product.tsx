@@ -7,10 +7,28 @@ import { fetchProducts } from "../../store/productSlice";
 function Product() {
   const dispatch = useAppDispatch();
   const { products, status } = useAppSelector((store) => store.products);
+
   useEffect(() => {
     dispatch(fetchProducts());
-    console.log(products);
   }, []);
+
+  if (status === "loading") {
+    return (
+      <>
+        <Navbar />
+        <div className="text-center mt-10 text-xl text-gray-600">Loading products...</div>
+      </>
+    );
+  }
+
+  if (status === "failed") {
+    return (
+      <>
+        <Navbar />
+        <div className="text-center mt-10 text-xl text-red-500">Failed to load products.</div>
+      </>
+    );
+  }
 
   return (
     <>
@@ -21,12 +39,10 @@ function Product() {
           className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5"
         >
           {products.length > 0 &&
-            products.map((product) => {
-              return <Card product={product} />;
-            })}
+            products.map((product) => (
+              <Card key={product.id} product={product} />
+            ))}
         </section>
-
-        {/* Support Me 🙏🥰 */}
       </div>
     </>
   );

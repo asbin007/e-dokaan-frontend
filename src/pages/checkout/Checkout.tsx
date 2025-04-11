@@ -3,8 +3,11 @@ import Navbar from "../../globals/components/Navbar";
 import { IData, PaymentMethod } from "./types";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { orderItem } from "../../store/checkoutSlice";
+import { useNavigate } from "react-router-dom";
+import { Status } from "../../globals/types";
 
 function Checkout() {
+  const navigate=useNavigate()
   const dispatch = useAppDispatch();
   const { items } = useAppSelector((store) => store.cart);
   const { khaltiUrl, status } = useAppSelector((store) => store.orders);
@@ -70,7 +73,11 @@ function Checkout() {
       window.location.href = khaltiUrl;
       return;
     }
-  }, [khaltiUrl, status]);
+    if (status === Status.SUCCESS && !khaltiUrl) {
+      alert("Order placed successfully!");
+      navigate("/");
+    }
+  }, [khaltiUrl, status,navigate]);
 
   return (
     <>

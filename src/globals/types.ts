@@ -4,7 +4,7 @@ export enum Status {
   LOADING = "loading",
 }
 
-interface ICategory {
+ interface ICategory {
   id: string;
   categoryName: string;
 }
