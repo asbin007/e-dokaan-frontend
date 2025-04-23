@@ -15,6 +15,7 @@ const store = configureStore({
     category: adminCategorySlice,
     users: adminUserSlice,
     adminProducts: adminProductSlice,
+    adminOrder: orderSlice, // Added new slice for orders
   },
 });
 

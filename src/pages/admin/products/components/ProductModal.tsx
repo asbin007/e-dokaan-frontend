@@ -15,7 +15,7 @@ export interface IProduct{
   productPrice: number, 
   productTotalStock: number, 
   categoryId: string | undefined, 
-  productImage: File | string
+  productImgUrl: File | string
 }
 
 const ProductModal: React.FC<ModalProps> = ({ closeModal }) => {
@@ -24,7 +24,7 @@ const ProductModal: React.FC<ModalProps> = ({ closeModal }) => {
         productName: "", 
         productDescription: "", 
         categoryId: undefined, 
-        productImage: "", 
+        productImgUrl: "", 
         productPrice: 0, 
         productTotalStock: 0
     })
@@ -33,7 +33,7 @@ const ProductModal: React.FC<ModalProps> = ({ closeModal }) => {
         const { name, value } = e.target
         setData({
             ...data, 
-            [name]: name === "productImage" ? e.target.files[0] as File : value 
+            [name]: name === "productImgUrl" ? e.target.files[0] as File : value 
         })
     }
 
@@ -102,7 +102,7 @@ const ProductModal: React.FC<ModalProps> = ({ closeModal }) => {
                         <div className="flex justify-between">
                             <div>
                                 <label htmlFor="productImage" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Product Image</label>
-                                <input name="productImage" onChange={handleChange} type="file" id="productImage" className="w-[220px] mt-1 p-2 border border-gray-300 dark:border-gray-600 rounded-md" required />
+                                <input name="productImgUrl" onChange={handleChange} type="file" id="productImgUrl" className="w-[220px] mt-1 p-2 border border-gray-300 dark:border-gray-600 rounded-md" required />
                             </div>
 
                             <div>

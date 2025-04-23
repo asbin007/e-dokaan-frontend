@@ -15,7 +15,7 @@ import Categories from "./pages/admin/categories/components/Categories";
 import AdminStats from "./pages/admin/stats/AdminStats";
 import Users from "./pages/admin/users/Users";
 import Products from "./pages/admin/products/Products";
-
+import AdminOrder from "./pages/admin/orders/AdminOrder";
 function App() {
   return (
     <Provider store={store}>
@@ -35,8 +35,8 @@ function App() {
           <Route path="/admin/categories" element={<Categories />} />
           <Route path="/admin/users" element={<Users />} />
           <Route path="/admin/products" element={<Products />} />
-
-
+          <Route path="/admin/products" element={<Products />} />
+          <Route path="/admin/orders" element={<AdminOrder />} />
         </Routes>
       </BrowserRouter>
     </Provider>
